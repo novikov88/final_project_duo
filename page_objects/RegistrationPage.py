@@ -11,7 +11,7 @@ class RegistrationPage(BasePage):
     PASSWORD_FIELD = (By.CSS_SELECTOR, "[data-test='password-input']")
     CREATE_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "[data-test='register-button']")
     FACEBOOK_BUTTON = (By.XPATH, "//span[contains(text(),'Facebook')]")
-    GOOGLE_BUTTON = (By.XPATH, "//span[contains(text(), 'Google')]")
+    GOOGLE_BUTTON = (By.XPATH, "//span[contains(text(),'Facebook')]/../../button[2]")
     TERMS_TEXT_LINK = (By.XPATH, "//b[contains(text(),'Terms')]")
     PRIVACY_POLICY_TEXT_LINK = (By.XPATH, "//b[contains(text(),'Privacy Policy')]")
 
@@ -41,7 +41,7 @@ class RegistrationPage(BasePage):
 
     def check_google_button(self):
         google_btn = self._elements(self.GOOGLE_BUTTON)
-        assert len(google_btn) == 2
+        assert len(google_btn) == 1
 
     def check_terms_link(self):
         self._element(self.TERMS_TEXT_LINK)

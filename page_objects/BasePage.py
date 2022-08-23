@@ -32,7 +32,7 @@ class BasePage:
             except TimeoutException:
                 self.add_screenshot_to_allure(locator)
                 self.logger.info(f"Failed to click on element: {locator} on page {self.browser.current_url}")
-                raise AssertionError(f"Failed to click on element: {locator} on page {self.browser.current_url}")
+                raise AssertionError(f"(!)Failed to click on element: {locator} on page {self.browser.current_url}(!)")
 
     def _element(self, locator: tuple):
         with allure.step(f"Ищу элемент {locator}"):
@@ -41,7 +41,7 @@ class BasePage:
                 return self.wait.until(EC.visibility_of_element_located(locator))
             except TimeoutException:
                 self.add_screenshot_to_allure(locator)
-                self.logger.info(f"Cant find element by locator: {locator} on page {self.browser.current_url}")
+                self.logger.info(f"(!)Cant find element by locator: {locator} on page {self.browser.current_url}(!)")
                 raise AssertionError(f"Cant find element by locator: {locator} on page {self.browser.current_url}")
 
     def _elements(self, locator: tuple):
@@ -51,7 +51,7 @@ class BasePage:
                 return self.wait.until(EC.visibility_of_all_elements_located(locator))
             except TimeoutException:
                 self.add_screenshot_to_allure(locator)
-                self.logger.info(f"Cant find elements by locator: {locator} on page {self.browser.current_url}")
+                self.logger.info(f"(!)Cant find elements by locator: {locator} on page {self.browser.current_url}(!)")
                 raise AssertionError(f"Cant find elements by locator: {locator} on page {self.browser.current_url}")
 
     def _input(self, locator, value):
@@ -64,7 +64,7 @@ class BasePage:
                 find_field.send_keys(value)
             except TimeoutException:
                 self.add_screenshot_to_allure(locator)
-                self.logger.info(f"Failed to complete the field: {locator} on page {self.browser.current_url}")
+                self.logger.info(f"(!)Failed to complete the field: {locator} on page {self.browser.current_url}(!)")
                 raise AssertionError(f"Failed to complete the field: {locator} on page {self.browser.current_url}")
 
     def _mouse_hover(self, locator: tuple):
@@ -75,5 +75,5 @@ class BasePage:
                     self.wait.until(EC.visibility_of_element_located(locator))).perform()
             except TimeoutException:
                 self.add_screenshot_to_allure(locator)
-                self.logger.info(f"Failed to hover over element : {locator} on page {self.browser.current_url}")
+                self.logger.info(f"(!)Failed to hover over element : {locator} on page {self.browser.current_url}(!)")
                 raise AssertionError(f"Failed to hover over element : {locator} on page {self.browser.current_url}")
