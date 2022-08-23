@@ -27,7 +27,7 @@ class BasePage:
     def _click(self, locator: tuple):
         with allure.step(f"Кликаю в элемент {locator}"):
             try:
-                self.logger.info("Click on element: {}".format(locator))
+                self.logger.info(f"Click on element: {locator}")
                 self.wait.until(EC.element_to_be_clickable(locator)).click()
             except TimeoutException:
                 self.add_screenshot_to_allure(locator)
@@ -37,7 +37,7 @@ class BasePage:
     def _element(self, locator: tuple):
         with allure.step(f"Ищу элемент {locator}"):
             try:
-                self.logger.info("Check if element {} is present".format(locator))
+                self.logger.info(f"Check if element {locator} is present")
                 return self.wait.until(EC.visibility_of_element_located(locator))
             except TimeoutException:
                 self.add_screenshot_to_allure(locator)
@@ -47,7 +47,7 @@ class BasePage:
     def _elements(self, locator: tuple):
         with allure.step(f"Ищу все элементы {locator}"):
             try:
-                self.logger.info("Check if elements {} is present".format(locator))
+                self.logger.info(f"Check if elements {locator} is present")
                 return self.wait.until(EC.visibility_of_all_elements_located(locator))
             except TimeoutException:
                 self.add_screenshot_to_allure(locator)
@@ -57,7 +57,7 @@ class BasePage:
     def _input(self, locator, value):
         with allure.step(f"Ввожу '{value}' в элемент {locator}"):
             try:
-                self.logger.info("Input: {} in input: {}".format(value, locator))
+                self.logger.info(f"Input: {value} in input: {locator}")
                 find_field = self.wait.until(EC.presence_of_element_located(locator))
                 find_field.click()
                 find_field.clear()
@@ -70,7 +70,7 @@ class BasePage:
     def _mouse_hover(self, locator: tuple):
         with allure.step(f"Навожу на элемент {locator}"):
             try:
-                self.logger.info("Hover over an element {}".format(locator))
+                self.logger.info(f"Hover over an element {locator}")
                 ActionChains(self.browser).move_to_element(
                     self.wait.until(EC.visibility_of_element_located(locator))).perform()
             except TimeoutException:

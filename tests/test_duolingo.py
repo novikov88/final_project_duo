@@ -1,7 +1,8 @@
-from faker import Faker
-import random
-import time
 import os
+import time
+import allure
+import random
+from faker import Faker
 from dotenv import load_dotenv
 from page_objects.MainPage import MainPage
 from page_objects.LoginPage import LoginPage
@@ -21,6 +22,8 @@ PASSWORD = os.getenv('PASSWORD')
 fake = Faker()
 
 
+@allure.feature("Learning languages")
+@allure.title("Проверка количества доступных карточек языков")
 def test_count_number_of_cards(browser):
     """Шаги:
     1. На главной странице нажать кнопку "GET STARTED"
@@ -29,6 +32,8 @@ def test_count_number_of_cards(browser):
     MainPage(browser).count_of_cards()
 
 
+@allure.feature("Login page")
+@allure.title("Проверка элементов на странице логина")
 def test_check_elements_login_page(browser):
     """Шаги:
     1. На главной странице нажать кнопку "I ALREADY HAVE AN ACCOUNT"
@@ -55,22 +60,24 @@ def test_check_elements_login_page(browser):
     LoginPage(browser).check_privacy_policy()
 
 
-def test_check_elements_sign_up_page(browser):
+@allure.feature("Registration page")
+@allure.title("Проверка элементов на странице регистрации")
+def test_check_elements_registration_page(browser):
     """Шаги:
-        1. На главной странице нажать кнопку "I ALREADY HAVE AN ACCOUNT"
-        2. Нажать на кнопку "Sign up"
-        2. Проверить наличие элементов на странице:
-        - иконка закрытия
-        - кнопка "LOGIN"
-        - поле "Age"
-        - поле "Name (optional)"
-        - поле "Email"
-        - поле "Password"
-        - кнопка "Create account"
-        - кнопка "Facebook"
-        - кнопка "Google"
-        - текст-ссылку "Terms"
-        - текст ссылку 'Privacy Policy'"""
+    1. На главной странице нажать кнопку "I ALREADY HAVE AN ACCOUNT"
+    2. Нажать на кнопку "Sign up"
+    2. Проверить наличие элементов на странице:
+    - иконка закрытия
+    - кнопка "LOGIN"
+    - поле "Age"
+    - поле "Name (optional)"
+    - поле "Email"
+    - поле "Password"
+    - кнопка "Create account"
+    - кнопка "Facebook"
+    - кнопка "Google"
+    - текст-ссылку "Terms"
+    - текст ссылку 'Privacy Policy'"""
     MainPage(browser).go_to_login()
     LoginPage(browser).go_to_registration()
     RegistrationPage(browser).check_close_button()
@@ -86,6 +93,8 @@ def test_check_elements_sign_up_page(browser):
     RegistrationPage(browser).check_privacy_policy()
 
 
+@allure.feature("Login")
+@allure.title("Авторизация с невалидными данными")
 def test_invalid_login_fake_data(browser):
     """Шаги:
     1. На главной странице нажать кнопку "I ALREADY HAVE AN ACCOUNT"
@@ -99,6 +108,8 @@ def test_invalid_login_fake_data(browser):
     LoginPage(browser).check_error_text()
 
 
+@allure.feature("Login")
+@allure.title("Авторизация с незаполненными полями")
 def test_invalid_login_empty_fields(browser):
     """Шаги:
     1. На главной странице нажать кнопку "I ALREADY HAVE AN ACCOUNT"
@@ -110,6 +121,8 @@ def test_invalid_login_empty_fields(browser):
     LoginPage(browser).check_error_text_password()
 
 
+@allure.feature("Registration")
+@allure.title("Успешная регистрация")
 def test_successful_registration(browser):
     """Шаги:
     1. На главной странице нажать кнопку "I ALREADY HAVE AN ACCOUNT"
@@ -130,6 +143,8 @@ def test_successful_registration(browser):
     WelcomePage(browser).count_of_cards()
 
 
+@allure.feature("Login")
+@allure.title("Логин нового пользователя")
 def test_successful_login_new_account(browser):
     """Шаги:
     1. На главной странице нажать кнопку "I ALREADY HAVE AN ACCOUNT"
@@ -145,6 +160,8 @@ def test_successful_login_new_account(browser):
     WelcomePage(browser).check_title()
 
 
+@allure.feature("Login")
+@allure.title("Логин старого пользователя")
 def test_login_and_logout_old_account(browser):
     """Шаги:
     1. На главной странице нажать кнопку "I ALREADY HAVE AN ACCOUNT"
@@ -163,6 +180,8 @@ def test_login_and_logout_old_account(browser):
     MainPage(browser).check_title()
 
 
+@allure.feature("Learning languages")
+@allure.title("Проверка количества доступных карточек языков на главной странице")
 def test_check_the_number_of_languages(browser):
     """Шаги:
     1. На главной странице нажать кнопку навести курсор на меню "Site language:"
@@ -171,6 +190,8 @@ def test_check_the_number_of_languages(browser):
     MainPage(browser).count_the_number_of_languages()
 
 
+@allure.feature("Profile")
+@allure.title("Проверка смены имени в профиле")
 def test_change_name(browser):
     """Шаги:
     1. На главной странице нажать кнопку "I ALREADY HAVE AN ACCOUNT"
